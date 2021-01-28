@@ -1,28 +1,80 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <v-app>
+      <v-system-bar app>
+        <v-btn
+          @click="rota('Home')"
+        >
+          Home
+        </v-btn>
+
+        <v-spacer/>
+        <v-btn
+          v-if="user"
+          @click="rota('Login')"
+        >
+          Login
+        </v-btn>
+        
+        <v-btn
+          v-else
+        >
+          Meu perfil
+        </v-btn>
+
+        <v-btn
+          v-if="user"
+          @click="rota('novaConta')"
+        >
+          Criar conta
+        </v-btn>
+        <v-btn
+          v-else
+          @click="sair()"
+        >
+          Sair
+        </v-btn>
+      </v-system-bar>
+
+      <v-app-bar app>
+        <v-col>
+          <v-toolbar-title>Lista Filmes SAMUEL WILLIAN DE SOUZA</v-toolbar-title>
+        </v-col>
+      </v-app-bar>
+
+      <!-- Sizes your content based upon application components -->
+      <v-main>
+
+      <!-- Provides the application the proper gutter -->
+      <v-container fluid>
+
+        <!-- If using vue-router -->
+        <router-view></router-view>
+      </v-container>
+      </v-main>
+    </v-app>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import router from '@/router'
+import loginServices from '@/firebase/login'
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  data: () => ({
+    user: true,
+  }) ,
+  methods:{
+    rota(name){
+      router.push({name: name})
+    },
+    sair(){
+      loginServices.logout()
+      this.user = loginServices.logged();
+    },
+  },
+  updated(){
+    this.user = loginServices.logged();
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
