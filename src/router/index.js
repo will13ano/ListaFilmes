@@ -4,8 +4,9 @@ import Router from 'vue-router'
 import Login from '@/components/login.vue'
 import Home from '@/components/home.vue'
 import NovaConta from '@/components/novaconta.vue'
-Vue.use(Router)
+import ListaFilmes from '@/components/lista.vue'
 
+Vue.use(Router)
 
 const routes = [
     {
@@ -14,7 +15,7 @@ const routes = [
         component: Home
     },
     {
-        path: '/Login',
+        path: '/login',
         name: 'Login',
         component: Login
     },
@@ -22,6 +23,11 @@ const routes = [
         path: '/novaConta',
         name: 'novaConta',
         component: NovaConta
+    },
+    {
+        path: '/mylist',
+        name: 'minhaLista',
+        component: ListaFilmes
     }
 ]
 

@@ -1,4 +1,5 @@
 <template>
+  <div class="login">
     <v-col
       cols="7"
     >
@@ -21,6 +22,8 @@
             @click="login()"
           >Login</v-btn>
         </v-col>
+        <v-spacer></v-spacer>
+        <v-spacer></v-spacer>
         <v-col>
           <v-btn
             @click="rota('novaConta')"
@@ -30,6 +33,7 @@
         </v-col>
       </v-row>
     </v-col>
+  </div>
 </template>
 
 <script>
@@ -44,7 +48,12 @@ export default {
   }),
   methods: {
     login() {
-      loginServices.doLogin(this.email, this.password)
+      if(!loginServices.logged())
+        loginServices.doLogin(this.email, this.password)
+      else{
+        window.alert("Você já está conectado!")
+        router.push('/home')
+      }
     },
     rota(name){
       router.push({name: name})
@@ -52,3 +61,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.login{
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: center;
+}
+</style>

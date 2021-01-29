@@ -25,17 +25,22 @@ export default {
         const usuario = firebaseApp.auth().currentUser;
 
         if(usuario){
-            return false
+            return true
         }
         else{
-            return true
+            return false
         }
     },
     logout(){
-        firebaseApp.auth().signOut().then(() => {
+        firebaseApp.auth().signOut()
+        .then(() => {
             window.alert("Você se desconectou!")
-        }).catch((error) => {
+        })
+        .catch((error) => {
             window.alert(error.message)
         });
+    },
+    atual(){
+        return firebaseApp.auth().currentUser;
     }
 }

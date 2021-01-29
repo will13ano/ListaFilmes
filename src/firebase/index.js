@@ -10,6 +10,6 @@ var firebaseConfig = {
     measurementId: "G-332MQ9T03R"
 };
 
-
 export const firebaseApp = firebase.initializeApp(firebaseConfig);
+export const database = firebase.database();
 firebase.analytics()
