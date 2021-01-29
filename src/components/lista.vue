@@ -9,7 +9,7 @@
                     outlined
                     style="display: flex; flex-direction: row-reverse;"
                     elevation="13"
-                    :color="filme.watched ? '#90EE90' : ''"
+                    :color="filme.watched ? '#2E7D32' : ''"
                     widht="100%"
                 >
                     <img :src="`http://image.tmdb.org/t/p/original/${filme.poster_path}`" height="240" />
