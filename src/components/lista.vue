@@ -55,7 +55,7 @@ export default {
     },
     created(){
         if(loginServices.logged()){
-            this.lista = listServices.load(this.user.email)
+            this.lista = listServices.loadFilmes(this.user.email)
         }   
     },
 }
