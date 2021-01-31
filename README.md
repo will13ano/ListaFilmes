@@ -1,7 +1,7 @@
 # ListaFilmes
-Versão final esta localizada na branch master
-Versão em desenvolvimento na branch develop
-Main apenas com README
+* Versão final esta localizada na branch master.
+* Versão em desenvolvimento na branch develop.
+* Main apenas com README.
 
 ## Project setup
 ```
