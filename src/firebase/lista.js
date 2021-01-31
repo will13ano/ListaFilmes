@@ -12,12 +12,12 @@ export default{
         var listaFilmes = [];
 
         for(var cont = 0; cont < listaID.length; cont++){
-            tmdbFunc.buscaID(listaID[cont])
+            const aux = listaID[cont].watched
+            tmdbFunc.buscaID(listaID[cont].id)
             .then((filme) => {
-                listaFilmes.push(filme.data)
+                listaFilmes.push({movie: filme.data, watched: aux})
             })
         }
-        
         return listaFilmes;
     }
 }

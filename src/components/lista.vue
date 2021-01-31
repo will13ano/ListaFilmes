@@ -12,12 +12,12 @@
                     :color="filme.watched ? '#2E7D32' : ''"
                     widht="100%"
                 >
-                    <img :src="`http://image.tmdb.org/t/p/original/${filme.poster_path}`" height="240" />
+                    <img :src="`http://image.tmdb.org/t/p/original/${filme.movie.poster_path}`" height="240" />
                     
                     <div>
-                        <v-card-title>{{filme.title}}</v-card-title>
-                        <v-card-subtitle>{{filme.original_title}}</v-card-subtitle>
-                        <v-card-text>{{filme.overview}}</v-card-text>
+                        <v-card-title>{{filme.movie.title}}</v-card-title>
+                        <v-card-subtitle>{{filme.movie.original_title}}</v-card-subtitle>
+                        <v-card-text>{{filme.movie.overview}}</v-card-text>
                         <v-spacer></v-spacer>
                         <v-card-actions>
                             <v-btn
@@ -47,7 +47,7 @@ export default {
     }),
     methods: {
         remove(filme){
-            window.alert(`Você removeu "${filme.title}" da Lista !`)
+            window.alert(`Você removeu "${filme.movie.title}" da Lista !`)
 
             this.lista.splice(this.lista.indexOf(filme) ,1)
             listServices.save(this.user.email, this.lista)
@@ -58,5 +58,18 @@ export default {
             this.lista = listServices.loadFilmes(this.user.email)
         }   
     },
+    updated(){
+
+        if(loginServices.logged()){
+            var listaID = [];
+
+            this.lista.forEach(element => {
+                listaID.push({id: element.movie.id, watched: element.watched})
+            });
+
+            listServices.save(this.user.email, listaID)
+        }
+    }
+    
 }
 </script>

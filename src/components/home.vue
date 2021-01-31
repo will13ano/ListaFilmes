@@ -113,11 +113,11 @@ export default {
             
             if(loginServices.logged()){
                 for(var cont = 0; cont < this.lista.length && aux; cont++){
-                    if(filme.id === this.lista[cont])
+                    if(filme.id === this.lista[cont].id)
                         aux = false;
                 }
                 if(aux){
-                    this.lista.push(filme.id)
+                    this.lista.push({id: filme.id, watched: false})
                     listServices.save(user.email, this.lista);
                     this.snackbar = true;
                 }
