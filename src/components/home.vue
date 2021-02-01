@@ -45,6 +45,10 @@
                             </v-card-actions>
                         </div>
                     </v-card>
+                    <v-snackbar
+                        v-model="snackbar"
+                        timeout="2000"
+                    >Adicionado a lista</v-snackbar>
                     <v-spacer></v-spacer>
                 </v-col>
             </v-row>
@@ -86,6 +90,7 @@ import listServices from '@/firebase/lista'
 
 export default {
     data: () => ({
+        snackbar: false,
         page: '1',
         maxPages: '',
         toSearch: '',
@@ -106,15 +111,15 @@ export default {
             var aux = true
             
             if(loginServices.logged()){
+                this.lista = listServices.load(user.email);
                 for(var cont = 0; cont < this.lista.length && aux; cont++){
-                    if(filme.title === this.lista[cont].title)
+                    if(filme.id === this.lista[cont].id)
                         aux = false;
                 }
-
                 if(aux){
-                    this.lista = listServices.load(user.email);
-                    this.lista.push(filme)
+                    this.lista.push({id: filme.id, watched: false})
                     listServices.save(user.email, this.lista);
+                    this.snackbar = true;
                 }
                 else
                     window.alert("Filme já está na lista!")
@@ -157,6 +162,7 @@ export default {
                 })
         },
         clear(){
+            this.toSearch= '';
             this.resultadoBusca = [];
             this.page = '1';
             this.maxPages = '';

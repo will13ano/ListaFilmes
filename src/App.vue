@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <v-app>
+    <v-app
+      dark
+    >
       <v-app-bar app>
         <v-row>
         <router-link class="none" :to="'/'">
@@ -73,7 +75,7 @@ export default {
 
 <style>
 .none{
-  color: black;
+  color: white;
   font-style: unset;
   text-decoration: none;
 }
