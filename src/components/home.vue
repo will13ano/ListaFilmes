@@ -108,10 +108,10 @@ export default {
         },
         list(filme){
             var user = loginServices.atual()
-            this.lista = listServices.load(user.email);
             var aux = true
             
             if(loginServices.logged()){
+                this.lista = listServices.load(user.email);
                 for(var cont = 0; cont < this.lista.length && aux; cont++){
                     if(filme.id === this.lista[cont].id)
                         aux = false;
